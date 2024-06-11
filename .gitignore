@@ -1,2 +1,6 @@
 /client/node_modules/
 /server/node_modules/
+
+/server/environment/.env.dev
+/server/environment/.env.qa
+/server/environment/.env.prod
