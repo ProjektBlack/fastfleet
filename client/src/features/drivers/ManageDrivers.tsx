@@ -1,21 +1,34 @@
 import { useEffect, useState } from "react";
 
 import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { Oval } from "react-loader-spinner";
 
 const ManageDrivers = () => {
+  const [loading, setLoading] = useState(false);
   const [drivers, setDrivers] = useState([]);
 
   useEffect(() => {
+    getTableData();
+  }, []);
+
+  const getTableData = () => {
+    setLoading(true);
     fetch("http://localhost:3000/drivers")
       .then((res) => res.json())
       .then((data) => {
         setDrivers(data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setDrivers([]);
+        setLoading(false);
       });
-  }, []);
+  }
 
   return (
   <div>
-    <div id="manage-drivers-menu-bar" className="bg-gray-100 p-3 shadow-md flex">
+    <div id="manage-drivers-menu-bar" className="bg-white-100 p-3 shadow-md flex">
       <div>
         <h1 className="text-4xl font-bold text-green-800 leading-tight">Manage Drivers</h1>
       </div>
@@ -25,13 +38,19 @@ const ManageDrivers = () => {
         </button>
       </div>
     </div>
+    
     <div id="manage-drivers-table" className="relative h-[90vh] overflow-y-auto"> 
-        <table className="table-auto w-full">
+        {loading? (
+          <div id="loadingOval" className="flex justify-center items-center h-full">
+            <Oval visible={true} height="80" width="80" color="#005c29" 
+            ariaLabel="oval-loading" wrapperStyle={{}} wrapperClass=""/>
+          </div>
+          ) : <table className="table-auto">
           <thead className="sticky top-0">
             <tr>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Phone</th>
-              <th className="px-4 py-2">Operations</th>
+              <th className="px-4 py-2 w-[50vw]">Name</th>
+              <th className="px-4 py-2 w-[40vw]">Phone</th>
+              <th className="px-4 py-2 w-[10vw]">Operations</th>
             </tr>
           </thead>
           <tbody>
@@ -50,7 +69,7 @@ const ManageDrivers = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> }
       </div>
   </div>
   
