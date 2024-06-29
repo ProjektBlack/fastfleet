@@ -16,6 +16,11 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
+// Add user access authentication in the future
+
 // Routes
-app.use('/drivers', require('./services/drivers/controllers/get.js'));
+
+// Drivers
+app.use('/drivers', require('./services/drivers/controllers/get_all_drivers.js'));
+app.use('/list-drivers', require('./services/drivers/controllers/list_drivers.js'));
 

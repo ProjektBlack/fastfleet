@@ -6,10 +6,10 @@ const dbInstance = require('../../../utils/database/db_instance.js');
 // Implement lazy loading via offset and filters next time
 router.get('/', async (req, res) => {
     try {
-        let data = { data: [] };
+        let data = [];
         const dal = new DriverDAL(dbInstance);
         const report = await dal.getAllDrivers();
-        data.data.push(...report)
+        data.push(...report)
         res.status(200).json(data);
     } catch (err) {
         console.error(err);

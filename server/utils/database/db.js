@@ -41,6 +41,18 @@ class Database {
     });
   }
 
+  executeWithPagination(sql, filters, limit, offset) {
+    const parameters = [...filters, limit, offset]; 
+    const paginated_sql = `${sql} LIMIT ? OFFSET ?`; 
+
+    return new Promise((resolve, reject) => {
+      this.connection.query(paginated_sql, parameters, (err, rows) => {
+        if (err) return reject(err);
+        resolve(rows);
+      });
+    });
+  }
+
   // Rollback transaction
   rollback() {
     return new Promise((resolve, reject) => {
