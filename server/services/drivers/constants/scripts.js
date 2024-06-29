@@ -1,11 +1,12 @@
 let Scripts = {
     GET_ALL_DRIVERS: 
     `SELECT 
-        DriverID, 
-        Name, 
-        Phone,
-        Email
-    FROM drivers drv`
+        id, 
+        name, 
+        phone,
+        email
+    FROM drivers drv
+    ORDER BY drv.name ASC`
 }
 
 module.exports = Scripts;

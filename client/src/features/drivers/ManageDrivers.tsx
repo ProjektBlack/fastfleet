@@ -55,9 +55,9 @@ const ManageDrivers = () => {
           </thead>
           <tbody>
             {drivers.map((driver) => (
-              <tr key={driver.DriverID}>
-                <td className="border px-4 py-2">{driver.Name}</td>
-                <td className="border px-4 py-2">{driver.Phone}</td>
+              <tr key={driver.id}>
+                <td className="border px-4 py-2">{driver.name}</td>
+                <td className="border px-4 py-2">{driver.phone}</td>
                 <td className="border px-4 py-2">
                   <button className="p-2 rounded-full hover:bg-green-700 hover:text-white">
                     <PencilIcon className="w-5 h-5"/>
